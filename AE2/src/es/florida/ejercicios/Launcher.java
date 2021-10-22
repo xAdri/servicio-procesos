@@ -39,7 +39,7 @@ public class Launcher {
                 line = br.readLine();
                 System.out.println("==> Doing the calculations for: " + line);
                 String[] neoData = line.split(",");
-                launchProbability( neoData[0], neoData[1], neoData[2]);
+                launchProbability(neoData[0], neoData[1], neoData[2]);
             }
 
         } catch (Exception e) {

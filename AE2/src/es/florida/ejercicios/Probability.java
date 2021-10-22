@@ -12,18 +12,18 @@ public class Probability {
         Probability prob = new Probability();
         double posEarth = Float.parseFloat(args[0]);
         double velEarth = Float.parseFloat(args[1]);
-        probabilityNeoCollision(prob, posEarth, velEarth, args);
+        writeProbabilityNeoCollision(prob, posEarth, velEarth, args);
         
     }
     
-    static void probabilityNeoCollision(Probability prob, double posEarth, double velEarth, String[] args) {
+    static void writeProbabilityNeoCollision(Probability prob, double posEarth, double velEarth, String[] args) {
     	FileWriter fw = null;
         PrintWriter pw = null;
         try {
             fw = new FileWriter(args[2]);
             pw = new PrintWriter(fw);
             double result = prob.probabilityColision(posEarth, velEarth);
-            pw.println(result);
+            pw.println(result + "%");
             System.out.println("The probability that it will collide with the earth in the next 50 years is " + result  + "%");
 
         } catch (Exception e) {
