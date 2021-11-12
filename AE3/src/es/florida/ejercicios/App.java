@@ -17,8 +17,9 @@ public class App {
             m.start();
         }
 
+        // Ampliación protocolo COVID-19
         // Hilo para ventilar
-        Thread thread1 = new Thread(new Runnable() {
+        Thread v1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -31,7 +32,7 @@ public class App {
         });
 
         // Hilo para apagar el ventilador
-        Thread thread2 = new Thread(new Runnable() {
+        Thread v2 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -43,19 +44,19 @@ public class App {
             }
         });
 
-        // Iniciamos
-        thread1.start();
-        thread2.start();
+        // Iniciamos los ventiladores
+        v1.start();
+        v2.start();
 
         // Alternar el sistema de ventilacion con el apagado y encendido
         try {
-            thread1.join();
+            v1.join();
         } catch (InterruptedException e1) {
 
             e1.printStackTrace();
         }
         try {
-            thread1.join();
+            v2.join();
         } catch (InterruptedException e) {
 
             e.printStackTrace();
