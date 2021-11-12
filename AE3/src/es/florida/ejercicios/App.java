@@ -2,29 +2,66 @@ package es.florida.ejercicios;
 
 public class App {
 
-	public static void main(String[] args) {
-		Mina mina = new Mina(100);
-		Minero minero = new Minero(mina);
-		Minero minero2 = new Minero(mina);
-		Minero minero3 = new Minero(mina);
-		Minero minero4 = new Minero(mina);
-		Minero minero5 = new Minero(mina);
-		Minero minero6 = new Minero(mina);
-		Minero minero7 = new Minero(mina);
-		Minero minero8 = new Minero(mina);
-		Minero minero9 = new Minero(mina);
-		Minero minero10 = new Minero(mina);
-		System.out.println("Trabajando...");
-		minero.start();
-		minero2.start();
-		minero3.start();
-		minero4.start();
-		minero5.start();
-		minero6.start();
-		minero7.start();
-		minero8.start();
-		minero9.start();
-		minero10.start();
-	}
+    public static void main(String[] args) {
+    	// Iniciamos la mina con los recursos que tiene y definimos el numero de mineros
+        Mina mina = new Mina(100);
+        int mineros = 10;
+        Ventilador ventilador = new Ventilador();
 
+        // Crear un hilo para cada minero asignandole el nombre y iniciarlo)
+        for (int i = 0; i < mineros; i++) {
+            Minero minero = new Minero(mina);
+            Thread m;
+            m = new Thread(minero);
+            m.setName("Minero " + i);
+            m.start();
+        }
+
+        // Hilo para ventilar
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ventilador.encenderVentilador();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Hilo para apagar el ventilador
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ventilador.apagarVentilador();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Iniciamos
+        thread1.start();
+        thread2.start();
+
+        // Alternar el sistema de ventilacion con el apagado y encendido
+        try {
+            thread1.join();
+        } catch (InterruptedException e1) {
+
+            e1.printStackTrace();
+        }
+        try {
+            thread1.join();
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+        }
+        
+        // En el evaluable pone que tienen que encenderse y apagarse indefinidamente
+
+    }
 }
