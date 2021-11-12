@@ -17,7 +17,6 @@ public class Ventilador {
                 notify();
                 System.out.println("Ventilador apagado");
             }
-
         }
     }
 
